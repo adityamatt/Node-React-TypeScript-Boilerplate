@@ -8,7 +8,8 @@ const getRandomColor = () => {
   return `rgba(${rand()},${rand()},${rand()},1)`
 }
 export function ChartComponent() {
-  const [header, setHeader] = React.useState<string>('Hover over graph to change this text')
+  const defaultHeader = 'Hover over graph to change this text'
+  const [header, setHeader] = React.useState<string>(defaultHeader)
   const [color1, setColor1] = React.useState<string>('rgba(255, 0, 0, 1)')
   const [color2, setColor2] = React.useState<string>('rgba(0, 255, 0, 1)')
   const data: Chart.ChartData = {
@@ -56,9 +57,6 @@ export function ChartComponent() {
     ],
   }
   const options: Chart.ChartOptions = {
-    onHover: (e: React.MouseEvent<HTMLElement>) => {
-      setHeader('You Hovered over the graph')
-    },
     scales: {
       yAxes: [
         {
@@ -73,7 +71,7 @@ export function ChartComponent() {
   return (
     <div>
       <hr />
-      <Grid container justify="center">
+      <Grid container justify="center" id="HeaderText">
         {header}
       </Grid>
       <Button
@@ -90,8 +88,11 @@ export function ChartComponent() {
         options={options}
         type={1}
         color={'rgba(0,0,0,0)'}
-        onClick={() => {
-          console.log('CLicked')
+        onMouseOver={() => {
+          setHeader('Mouse Hovered over Chart')
+        }}
+        onMouseLeave={() => {
+          setHeader(defaultHeader)
         }}
       />
       <hr />
