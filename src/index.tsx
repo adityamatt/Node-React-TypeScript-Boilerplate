@@ -6,16 +6,19 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import configureStore from './store/store'
 import { BrowserRouter } from 'react-router-dom'
+import { Container } from '@material-ui/core'
 
 declare let module: any
 const { store } = configureStore()
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>,
+  <Container>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </Container>,
   document.getElementById('root')
 )
 if (module.hot) {
